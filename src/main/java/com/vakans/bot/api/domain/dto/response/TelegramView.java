@@ -14,6 +14,6 @@ public class TelegramView {
 
     private long chatId;
     private String confirmationKey;
-    private boolean confirmed;
+    private byte confirmed;
     private long userId;
 }

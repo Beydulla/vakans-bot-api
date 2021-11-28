@@ -43,16 +43,6 @@ public class UserService implements UserDetailsService
     @Autowired
     private WebsiteRepository websiteRepository;
 
-    @PostConstruct
-    public void init(){
-        final Role role = Role.builder().authority("Admin").build();
-        final Set<Role> authorities = new HashSet<>();
-        authorities.add(role);
-        final String password = passwordEncoder.encode("test");
-        final User user = User.builder().authorities(authorities).createdAt(LocalDateTime.now()).username("beydu").password(password).build();
-        userRepository.save(user);
-    }
-
     @Override
     public UserDetails loadUserByUsername(final String username){
         return userRepository.findByUsername(username).orElseThrow(

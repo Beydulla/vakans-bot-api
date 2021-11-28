@@ -18,7 +18,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity
+@Entity(name = "users")
 public class User implements UserDetails, Serializable {
 
     @Id

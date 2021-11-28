@@ -33,6 +33,6 @@ public class TelegramService {
         final LocalDateTime localDateTimeNow = LocalDateTime.now();
         return Telegram.builder().createdAt(localDateTimeNow)
                 .expiredAt(localDateTimeNow.plusDays(1)).confirmationKey(confirmationKey)
-                .confirmed(false).user(user).build();
+                .confirmed((byte) 0).user(user).build();
     }
 }
