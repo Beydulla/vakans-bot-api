@@ -23,8 +23,8 @@ public class Filter {
     private int maximumSalary;
     private String employer;
 
-    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", referencedColumnName = "id")
-    private User user;
+    @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinColumn(name = "telegram_id", referencedColumnName = "id")
+    private Telegram telegram;
 
 }

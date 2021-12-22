@@ -11,15 +11,13 @@ import org.springframework.stereotype.Service;
 public class FilterService {
 
     @Autowired
-    private UserService userService;
-    @Autowired
     private FilterRepository filterRepository;
     @Autowired
     private FilterMapper filterMapper;
 
     public Filter create(final FilterRequest filterRequest){
         final Filter filter = filterMapper.toFilter(filterRequest);
-        filter.setUser(userService.loadUserByUserId(filterRequest.getUserId()));
+        //filter.setUser(userService.loadUserByUserId(filterRequest.getUserId()));
         filterRepository.save(filter);
         return filter;
     }

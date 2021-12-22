@@ -9,6 +9,6 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public abstract class FilterMapper {
 
-    @Mapping(target = "user", ignore = true)
+    @Mapping(target = "telegram", ignore = true)
     public abstract Filter toFilter(final FilterRequest filterRequest);
 }

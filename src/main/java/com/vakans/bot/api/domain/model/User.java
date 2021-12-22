@@ -50,8 +50,8 @@ public class User implements UserDetails, Serializable {
     @JoinColumn(name = "telegram_id", referencedColumnName = "id")
     private Telegram telegram;
 
-    @OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade =  CascadeType.ALL )
-    private Filter filter;
+    //@OneToOne(fetch = FetchType.LAZY, mappedBy = "user", cascade =  CascadeType.ALL )
+    //private Filter filter;
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(

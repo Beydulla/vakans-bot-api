@@ -1,6 +1,8 @@
-package com.vakans.bot.api.security;
+package com.vakans.bot.api.config;
 
 
+import com.vakans.bot.api.security.JwtAuthenticationEntryPoint;
+import com.vakans.bot.api.security.JwtRequestFilter;
 import com.vakans.bot.api.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

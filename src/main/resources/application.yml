@@ -1,0 +1,18 @@
+button:
+  skip: Boş buraxın.
+
+message:
+  tag: "Vakansiya axtarmaq üçün açar sözləri əlavə edin.\nAçar sözləri bir-birindən vergül ilə ayıra bilərsiniz."
+  salary:
+    min: "Minimum əmək haqqını qeyd edin və ya boş buraxın."
+    max: "Maksimum əmək haqqını qeyd edin və ya boş buraxın."
+  company: "İstədiyiniz şirkəti qeyd edin və ya boş buraxın."
+  summary: "Müraciətiniz təsdiq edildi.\nBundan sonra aşağıdaki parameterlərə uyğun vakansiyalar əldə edecəksiniz.\nTəşəkkürlər!\nDaxil etdiyiniz parameterlər:\n"
+
+field:
+  name:
+    tag: "Açar sözlər:\t"
+    salary:
+      min: "Minimum əmək haqqı:\t"
+      max: "Maksimum əmək haqqı:\t"
+    company: "Şirkət:\t"

@@ -17,6 +17,6 @@ public abstract class TelegramMapper {
 
     @AfterMapping
     protected void afterToTelegramView(final Telegram telegram, @MappingTarget TelegramView telegramView) {
-        telegramView.setUserId(telegram.getUser().getId());
+        //telegramView.(telegram.getUser().getId());
     }
 }

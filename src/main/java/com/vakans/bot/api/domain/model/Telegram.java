@@ -1,5 +1,6 @@
 package com.vakans.bot.api.domain.model;
 
+import com.vakans.bot.api.constants.ChatActionType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +31,9 @@ public class Telegram {
     private String confirmationKey;
     private byte confirmed;
 
+    @Enumerated(EnumType.STRING)
+    private ChatActionType stage;
+
     @OneToOne(fetch = FetchType.EAGER, mappedBy = "telegram", cascade =  CascadeType.ALL )
-    private User user;
+    private Filter filter;
 }

@@ -1,38 +1,19 @@
 package com.vakans.bot.api.service;
 
+import com.pengrad.telegrambot.model.request.ReplyKeyboardMarkup;
+import com.vakans.bot.api.domain.dto.request.TelegramMessageDTO;
 import com.vakans.bot.api.domain.dto.response.TelegramView;
 import com.vakans.bot.api.domain.model.Telegram;
-import com.vakans.bot.api.domain.model.User;
-import com.vakans.bot.api.mapper.TelegramMapper;
-import com.vakans.bot.api.repository.TelegramRepository;
-import javassist.NotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
-import java.util.UUID;
+public interface TelegramService {
 
-@Service
-public class TelegramService {
+    TelegramView create(final long userId);
 
-    @Autowired
-    private UserService userService;
-    @Autowired
-    private TelegramRepository telegramRepository;
-    @Autowired
-    private TelegramMapper telegramMapper;
+    void handleMessageRequest(final TelegramMessageDTO telegramMessageDTO);
 
-    public TelegramView create(final long userId){
-        final User user = userService.loadUserByUserId(userId);
-        final Telegram telegram = telegramRepository.save(initializeTelegram(user));
-        return telegramMapper.toTelegramView(telegram);
-    }
+    void sendMessage(final long chatId, final String message);
 
-    private Telegram initializeTelegram(final User user){
-        final String confirmationKey = UUID.randomUUID().toString();
-        final LocalDateTime localDateTimeNow = LocalDateTime.now();
-        return Telegram.builder().createdAt(localDateTimeNow)
-                .expiredAt(localDateTimeNow.plusDays(1)).confirmationKey(confirmationKey)
-                .confirmed((byte) 0).user(user).build();
-    }
+    void sendMessage(final long chatId, final String message, final ReplyKeyboardMarkup replyKeyboardMarkup);
+
+    void saveTelegram(final Telegram telegram);
 }
