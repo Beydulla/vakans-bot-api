@@ -19,8 +19,8 @@ public class Filter {
     private long id;
 
     private String tags;
-    private int minimumSalary;
-    private int maximumSalary;
+    private Integer minimumSalary;
+    private Integer maximumSalary;
     private String employer;
 
     @OneToOne(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)

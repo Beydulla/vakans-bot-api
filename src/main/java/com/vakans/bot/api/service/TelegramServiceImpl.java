@@ -37,6 +37,8 @@ public class TelegramServiceImpl implements TelegramService{
 
     @Value("${telegram.bot.token}")
     private String telegramToken;
+    @Value("${button.skip}")
+    private String skipButton;
 
     @PostConstruct
     public void init(){
@@ -54,6 +56,9 @@ public class TelegramServiceImpl implements TelegramService{
         }
         final ChatAction action = chatActionFactory.getChatAction(currentActionType);
         if(action != null){
+            if(skipButton.equals(telegramMessage.getMessageText())){
+                telegramMessage.setMessageText(null);
+            }
             action.handleAction(telegramMessage, telegram);
         }
     }

@@ -29,14 +29,16 @@ public class MaxSalaryAction implements ChatAction{
     @Override
     public void handleAction(TelegramMessageDTO telegramMessageDTO, Telegram telegram) {
         final Filter filter = telegram.getFilter();
-        filter.setMaximumSalary(Integer.parseInt(telegramMessageDTO.getMessageText()));
+        try{
+            filter.setMaximumSalary(Integer.parseInt(telegramMessageDTO.getMessageText()));
+        }catch (NumberFormatException e){
+            filter.setMaximumSalary(null);
+        }
         filterRepository.save(filter);
 
         telegram.setStage(ChatActionType.COMPANY);
         telegramRepository.save(telegram);
-
-        ReplyKeyboardMarkup replyKeyboardMarkup = new ReplyKeyboardMarkup(skipButton);
-        telegramService.sendMessage(telegramMessageDTO.getChatId(), companyMessage, replyKeyboardMarkup);
+        telegramService.sendMessage(telegramMessageDTO.getChatId(), companyMessage, new ReplyKeyboardMarkup(skipButton));
 
     }
 

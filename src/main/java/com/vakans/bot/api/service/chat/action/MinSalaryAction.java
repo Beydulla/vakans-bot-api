@@ -29,9 +29,12 @@ public class MinSalaryAction implements ChatAction{
     @Override
     public void handleAction(TelegramMessageDTO telegramMessageDTO, Telegram telegram) {
         final Filter filter = telegram.getFilter();
-        filter.setMinimumSalary(Integer.parseInt(telegramMessageDTO.getMessageText()));
+        try{
+            filter.setMinimumSalary(Integer.parseInt(telegramMessageDTO.getMessageText()));
+        }catch (NumberFormatException e){
+            filter.setMinimumSalary(null);
+        }
         filterRepository.save(filter);
-
         telegram.setStage(ChatActionType.MAXIMUM_SALARY);
         telegramRepository.save(telegram);
 
