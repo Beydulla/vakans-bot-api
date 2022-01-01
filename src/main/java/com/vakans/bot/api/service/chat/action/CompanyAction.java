@@ -35,7 +35,7 @@ public class CompanyAction implements ChatAction{
         filter.setEmployer(telegramMessageDTO.getMessageText());
         filterRepository.save(filter);
 
-        telegram.setStage(ChatActionType.FINISH);
+        telegram.setStage(ChatActionType.FINISHED);
         telegramService.saveTelegram(telegram);
 
         telegramService.sendMessage(telegramMessageDTO.getChatId(), generateSummaryMessage(filter));

@@ -1,5 +1,6 @@
 package com.vakans.bot.api.service;
 
+import com.google.gson.JsonSyntaxException;
 import com.pengrad.telegrambot.TelegramBot;
 import com.pengrad.telegrambot.model.request.ParseMode;
 import com.pengrad.telegrambot.model.request.ReplyKeyboardMarkup;
@@ -16,6 +17,7 @@ import com.vakans.bot.api.service.chat.action.ChatAction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.time.LocalDateTime;
@@ -39,18 +41,21 @@ public class TelegramServiceImpl implements TelegramService{
     private String telegramToken;
     @Value("${button.skip}")
     private String skipButton;
+    @Value("${button.reset}")
+    private String resetButton;
 
     @PostConstruct
     public void init(){
         telegramBot = new TelegramBot(telegramToken);
-
     }
 
     @Override
     public void handleMessageRequest(final TelegramMessageDTO telegramMessage) {
         ChatActionType currentActionType = ChatActionType.START;
         Telegram telegram = null;
-        if(isChatIdExist(telegramMessage.getChatId())){
+        if(resetButton.equals(telegramMessage.getMessageText())){
+            currentActionType = ChatActionType.RESET;
+        }else if(isChatIdExist(telegramMessage.getChatId())){
             telegram = telegramRepository.getTelegramByChatId(telegramMessage.getChatId());
             currentActionType = telegram.getStage();
         }
@@ -68,14 +73,23 @@ public class TelegramServiceImpl implements TelegramService{
         final SendMessage request = new SendMessage(chatId, message)
                 .parseMode(ParseMode.HTML)
                 .replyMarkup(replyKeyboardMarkup);
-        telegramBot.execute(request);
+        try {
+            telegramBot.execute(request);
+        }catch (JsonSyntaxException ignored){
+
+        }
+
     }
 
     @Override
     public void sendMessage(final long chatId, final String message) {
         final SendMessage request = new SendMessage(chatId, message)
                 .parseMode(ParseMode.HTML);
-        telegramBot.execute(request);
+        try {
+            telegramBot.execute(request);
+        }catch (JsonSyntaxException ignored){
+
+        }
     }
 
     private boolean isChatIdExist(final long chatId){
@@ -85,6 +99,12 @@ public class TelegramServiceImpl implements TelegramService{
     @Override
     public void saveTelegram(final Telegram telegram) {
         telegramRepository.save(telegram);
+    }
+
+    @Override
+    @Transactional
+    public void deleteByChatId(final long chatId) {
+        telegramRepository.deleteByChatId(chatId);
     }
 
 

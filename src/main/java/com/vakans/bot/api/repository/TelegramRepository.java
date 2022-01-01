@@ -10,4 +10,6 @@ public interface TelegramRepository extends JpaRepository<Telegram, Long> {
     long countTelegramByChatId(final long chatId);
 
     Telegram getTelegramByChatId(final long chatId);
+
+    void deleteByChatId(final long chatId);
 }

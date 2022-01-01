@@ -12,5 +12,6 @@ public enum ChatActionType {
     COMPANY,
     MINIMUM_SALARY,
     MAXIMUM_SALARY,
-    FINISH
+    FINISHED,
+    RESET
 }

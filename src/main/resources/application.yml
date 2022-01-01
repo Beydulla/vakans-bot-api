@@ -1,5 +1,7 @@
 button:
-  skip: Boş buraxın.
+  skip: "Boş buraxın."
+  reset: "/reset"
+  start: "/start"
 
 message:
   tag: "Vakansiya axtarmaq üçün açar sözləri əlavə edin.\nAçar sözləri bir-birindən vergül ilə ayıra bilərsiniz."
@@ -8,6 +10,7 @@ message:
     max: "Maksimum əmək haqqını qeyd edin və ya boş buraxın."
   company: "İstədiyiniz şirkəti qeyd edin və ya boş buraxın."
   summary: "Müraciətiniz təsdiq edildi.\nBundan sonra aşağıdaki parameterlərə uyğun vakansiyalar əldə edecəksiniz.\nTəşəkkürlər!\nDaxil etdiyiniz parameterlər:\n"
+  reset: "Parameterlər sıfırlandı.\nProqramı yenidən başlada bilərsiniz."
 
 field:
   name:

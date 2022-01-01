@@ -16,4 +16,6 @@ public interface TelegramService {
     void sendMessage(final long chatId, final String message, final ReplyKeyboardMarkup replyKeyboardMarkup);
 
     void saveTelegram(final Telegram telegram);
+
+    void deleteByChatId(final long chatId);
 }
